@@ -16,7 +16,7 @@ function CalcTotalDist(coordList){
         var lon2 = coordList[coordIndex + 1][1];
         
         totalDistance += distCalc(lat1, lon1, lat2, lon2);
-    }
+    } 
 
     return totalDistance
 }
