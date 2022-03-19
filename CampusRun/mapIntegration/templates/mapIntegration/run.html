@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/mapIntegration/stylesheet.css" />
+		<body style = "background-color:#3d3d3d"></body>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+
+
+	<body>
+		<div id="header">
+			<h1>Campus Run</h1>
+		</div>
+        <div id="main-div"></div>    
+        <div id="stopwatch">00:00:00</div>
+		<div id="footer">  
+				<p>Copyright JETPAD &copy;</p>
+		</div>
+        <div id="hidden_form_container"></div>
+	</body>
+	<script>
+        var timer = document.getElementById('stopwatch');
+        var running = false;
+        var initialTime = 0;
+        var finalTime = 0;
+        var totalTime = 0;
+        var mainDiv = document.getElementById("main-div");
+        var button = document.createElement('button')
+        var startDist = 100;
+        var endDist = 100;
+        mainDiv.appendChild(button);
+        button.setAttribute('type', 'button');
+        button.setAttribute('name', 'start');
+        button.setAttribute('id', 'button');
+        button.textContent = "Start";
+        button.addEventListener("click", checkStart, false);
+
+
+
+        function checkStart() {
+            if(navigator.geolocation){
+			    navigator.geolocation.getCurrentPosition(function(position){
+				console.log(position);
+				var pos = {
+					lat: position.coords.latitude,
+            		lng: position.coords.longitude,
+				};
+				console.log(pos.lat);
+				console.log(pos.lng);
+		        var temp = document.querySelector('iframe');
+		        temp.setAttribute('src', 'https://www.google.com/maps/embed/v1/search?key=AIzaSyDIA5OQv3KAXVj2PG9w8JoeFPFwl3TITI0&q=' + `${pos.lat},${pos.lng}`);			
+                if(Math.abs(distCalc('{{routeLat1}}', '{{routeLng1}}', pos.lat, pos.lng)) <= startDist){
+                    startTimer()
+                } else{
+                    console.log("Still " + Math.abs(distCalc('{{routeLat1}}', '{{routeLng1}}', pos.lat, pos.lng)) + "M away from starting location.");
+                    return;
+                }	         	
+                });
+            }else{
+			    console.log("geolocation not available");
+		    }
+        }
+
+        function hav(theta){
+            return (Math.sin(theta/2)**2)
+        }
+
+        function distCalc(lat1, lon1, lat2, lon2){
+            var R = 6371*10**3
+
+            var radLat1 = lat1 * Math.PI/180
+            var radLon1 = lon1 * Math.PI/180
+            var radLat2 = lat2 * Math.PI/180
+            var radLon2 = lon2 * Math.PI/180
+
+            var dLat = radLat2 - radLat1
+            var dLon = radLon2 - radLon1
+
+            var a = hav(radLat2 - radLat1) + (1 - hav(radLat1 - radLat2) - hav(radLat1 + radLat2)) * hav(radLon2 - radLon1)
+            var d = 2*R*Math.asin(Math.sqrt(a))
+
+            return(d)
+        }
+
+        function startTimer() {
+            running = true;
+            initialTime = Date.now();
+            timerCycle();
+            button.setAttribute('disabled', 'disabled')
+        }
+
+        function endTimer() {
+            running = false;
+            finalTime = Date.now();
+            totalTime = finalTime - initialTime;
+            var hours = Math.floor(totalTime/3600000);
+            var minutes = Math.floor(totalTime/60000) - (hours * 60);
+            var seconds = Math.floor(totalTime/1000) - ((hours * 3600) + (minutes*60)); 
+            timer.textContent = `${hours}:${minutes}:${seconds}`;
+            setTimeout("postRefreshPage()", 10000);
+        }
+
+        function timerCycle() {
+            var currentTime = Date.now() - initialTime;
+            var hours = Math.floor(currentTime/3600000);
+            var minutes = Math.floor(currentTime/60000) - (hours * 60);
+            var seconds = Math.floor(currentTime/1000) - ((hours * 3600) + (minutes*60)); 
+            timer.textContent = `${hours}:${minutes}:${seconds}`;
+            checkIfComplete();
+        }
+
+        function checkIfComplete() {
+            if(navigator.geolocation){
+			    navigator.geolocation.getCurrentPosition(function(position){
+				console.log(position);
+				var pos = {
+					lat: position.coords.latitude,
+            		lng: position.coords.longitude,
+				};
+				console.log(pos.lat);
+				console.log(pos.lng);
+		        var temp = document.querySelector('iframe');
+		        temp.setAttribute('src', 'https://www.google.com/maps/embed/v1/search?key=AIzaSyDIA5OQv3KAXVj2PG9w8JoeFPFwl3TITI0&q=' + `${pos.lat},${pos.lng}`);			
+                if(Math.abs(distCalc('{{routeLat1}}', '{{routeLng1}}', pos.lat, pos.lng)) <= endDist){
+                    endTimer()
+                } else{
+                    console.log("Still " + Math.abs(distCalc('{{routeLat2}}', '{{routeLng2}}', pos.lat, pos.lng)) + "M away from ending location.");
+                    setTimeout("timerCycle()", 1000);
+                }	         	
+                });
+            }else{
+			    console.log("geolocation not available");
+		    }
+        }
+
+        function hav(theta){
+            return (Math.sin(theta/2)**2)
+        }
+
+        function distCalc(lat1, lon1, lat2, lon2){
+            var R = 6371*10**3
+
+            var radLat1 = lat1 * Math.PI/180
+            var radLon1 = lon1 * Math.PI/180
+            var radLat2 = lat2 * Math.PI/180
+            var radLon2 = lon2 * Math.PI/180
+
+            var dLat = radLat2 - radLat1
+            var dLon = radLon2 - radLon1
+
+            var a = hav(radLat2 - radLat1) + (1 - hav(radLat1 - radLat2) - hav(radLat1 + radLat2)) * hav(radLon2 - radLon1)
+            var d = 2*R*Math.asin(Math.sqrt(a))
+
+            return(d)
+        }
+
+        function postRefreshPage () {
+            var theForm, newInput1;
+            // Start by creating a <form>
+            theForm = document.createElement('form');
+            theForm.action = "{% url 'mapIntegration:submitRun' routeName%}";
+            theForm.method = 'post'; 
+            var template = document.createElement('template');
+            template.innerHTML = '{% csrf_token %}'
+            theForm.appendChild(template.content.firstElementChild);
+            // Next create the <input>s in the form and give them names and values
+            newInput1 = document.createElement('input');
+            newInput1.type = 'hidden';
+            newInput1.name = 'input_1';
+            newInput1.value = totalTime;
+            // Now put everything together...
+            theForm.appendChild(newInput1);
+            // ...and it to the DOM...
+            document.getElementById('hidden_form_container').appendChild(theForm);
+            // ...and submit it
+            theForm.submit();
+        }
+	</script>	
+	</html>

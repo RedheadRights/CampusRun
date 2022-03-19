@@ -33,7 +33,6 @@ div {
 }
 
 .bgimg {
-    background-image: url('field.png');
 	background-size: 100%;
 	min-height: 450px;
 	min-width: 1050px;
@@ -54,6 +53,29 @@ h2 {
 	height: fit-content;
 	width: fit-content;
 	padding: 20px;
+}
+
+#stopwatch {
+    font-size: 100px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
+#button {
+    width: 100px;
+    height: 30px;
+    border: 3px soldi white;
+    border-radius: 50px;
+    background: #202020;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 55%;
+    left: 48.4%;
+    transform: translate(-51.6%, -45%);
 }
 
 #banner {
