@@ -1,7 +1,12 @@
 from django.db import models
 
-class runData(models.Model):
+class route(models.Model):
+    routeName = models.TextField(default='')
     addr1 = models.TextField()
     addr2 = models.TextField()
-    time = models.IntegerField()
 
+class runData(models.Model):
+    path = models.ForeignKey('route', on_delete=models.CASCADE)
+    distance = models.FloatField(default=0)
+    time = models.IntegerField()
+    name = models.TextField()
