@@ -5,7 +5,6 @@
 <html>
 
    <head>
-		<title></title>
 		<link rel="stylesheet" type="text/css" href="../../static/mapIntegration/stylesheet.css" />
 		<body style = "background-color:#3d3d3d"></body>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +19,7 @@
             </div>
         </div>
         <div id='content2'>
+            <!-- import addresses here -->
             <h2>$runName: Address1, Address2</h2>
             <table id="leaderboard">
                 <tr>
@@ -27,6 +27,7 @@
                     <th onclick="SortTable(1)">Route Time (hours:minutes:seconds)</th>
                     <th onclick="SortTable(2)">Route Distance (km)</th>
                 </tr>
+                <!--import row data from database-->
                 <tr>
                     <td>Freddy, James</td>
                     <td>00:00:59</td>
@@ -45,6 +46,9 @@
                 </tr>
             </table>
         </div>
+        <!-- <div id="content">
+            <p id="order">Ascending</p>
+        </div> -->
 
         <script>
             function SortTable(n) {
@@ -138,7 +142,7 @@
                         }
                     }
 
-                    console.log(switchCount);
+                    //leaderboard.getElementById("order").innerHTML = dir;
                 }
             }
 
