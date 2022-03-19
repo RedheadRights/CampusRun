@@ -1,0 +1,118 @@
+h1 {
+        color: #ffffff;
+}
+
+h2 {
+	text-align: center;
+}
+
+a {
+	color: #80FED8
+}
+
+img {
+        border-radius: 15%;
+}
+
+div {
+	background-color: rgb(255, 255, 255);
+}
+
+#header {
+        top: 0;
+        background-color: #1e2024;
+        text-align: center;
+        color: black;
+}
+
+#content {
+        width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 10px;
+}
+
+.bgimg {
+    background-image: url('field.png');
+	background-size: 100%;
+	min-height: 450px;
+	min-width: 1050px;
+	padding: 21px 50px;
+	margin-bottom: 100px;
+}
+
+#nav {
+	text-align: center;
+}
+
+h2 {
+        color: #29487a;
+}
+
+.blogs {
+	margin: 0 10px;
+	display: inline-grid;
+	height: 410px;
+	width: 300px; 
+	padding: 20px;
+}
+
+#banner {
+        background-color: #0d131d;
+        text-align: center;
+        color: black;
+		width: 1200px;
+}
+
+ul {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+
+#content2 {
+	width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 10px;
+}
+
+.other {
+	margin: 0 50px;
+	display: inline-grid;
+	height: 500px;
+	width: 400px; 
+	padding: 20px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+	background-color: #1e2024;
+    text-align: center;
+    color: rgb(255, 255, 255);
+	font-size: 14;
+}
+
+
+
+	
