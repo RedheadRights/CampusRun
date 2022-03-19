@@ -50,10 +50,9 @@ h2 {
 }
 
 .grid {
-	margin: 0 10px;
-	display: inline-grid;
-	height: 410px;
-	width: 300px; 
+	margin: auto;
+	height: fit-content;
+	width: fit-content;
 	padding: 20px;
 }
 

@@ -49,16 +49,28 @@
 			</div>
 		</div>	
 		<div id="content2">
-			<div id="grid">
-				<iframe
-					width="600"
-					height="450"
-					style="border:0"
-					loading="lazy"
-					allowfullscreen
-				>
-				</iframe>
-			</div>
+			<div class="grid">
+                    <iframe
+                        width="600"
+                        height="450"
+                        style="border:0"
+                        loading="lazy"
+                        allowfullscreen>
+                    </iframe>
+            </div>
+            <div class="grid">
+                <form action="{% url 'mapIntegration:submit'%}"method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        <label for="name">Enter the name of the route: : </label>
+                        <input type="text" name="name" id="name" required>                        
+                        <label for="addr1">Enter address 1: </label>
+                        <input type="text" name="addr1" id="addr1" required>
+                        <label for="addr1">Enter address 2: </label>
+                        <input type="text" name="addr2" id="addr2" required>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
 		</div>	
 		<div id="footer">  
 				<p>Copyright JETPAD &copy;</p>
