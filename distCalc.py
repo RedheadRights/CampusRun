@@ -1,4 +1,8 @@
 import math
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec90da391643c0f456b657aac362b1a7bb56f28a
 def distCalc(lat1, lon1, lat2, lon2):
     R = 6371*10**3 # meters
 
